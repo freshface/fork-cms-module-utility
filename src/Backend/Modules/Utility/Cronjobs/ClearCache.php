@@ -17,15 +17,14 @@ class ClearCache extends BackendBaseCronjob
      * Execute the action
      */
     public function execute()
-    {   
+    {
         $response = @file_get_contents('php://input');
 
-        if( (isset($response['source']) && $response['source'] == 'beanstalkapp'))
-        {
+        if ((isset($response['source']) && $response['source'] == 'beanstalkapp')) {
             BackendCacheClearModel::clear();
             BackendModel::setModuleSetting('Utility', 'last_cleared', strtotime('now'));
         }
 
-        parent::execute();  
+        parent::execute();
     }
 }

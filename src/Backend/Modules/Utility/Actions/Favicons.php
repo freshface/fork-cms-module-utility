@@ -25,27 +25,27 @@ use Backend\Modules\Utility\Engine\Model as BackendCacheClearModel;
 class Favicons extends BackendBaseActionEdit
 {
 
-	/**
-	 * Execute the action
-	 */
-	public function execute()
-	{
-		parent::execute();
+    /**
+     * Execute the action
+     */
+    public function execute()
+    {
+        parent::execute();
 
-		$this->loadForm();
-		$this->validateForm();
-		$this->parse();
-		$this->display();
-	}
+        $this->loadForm();
+        $this->validateForm();
+        $this->parse();
+        $this->display();
+    }
 
-	/**
-	 * Load the form
-	 */
-	private function loadForm()
-	{
+    /**
+     * Load the form
+     */
+    private function loadForm()
+    {
 
-		// create form
-		$this->frm = new BackendForm('settings');
+        // create form
+        $this->frm = new BackendForm('settings');
 
         $this->resolutions = array(
             array('name' =>'apple-touch-icon', 'seperator' => '-', 'resolution' => '57x57'),
@@ -71,44 +71,40 @@ class Favicons extends BackendBaseActionEdit
         $this->frm->addImage('all');
         $this->frm->addImage('og');
 
-        foreach($this->resolutions as &$resolution){
-            $field = $this->frm->addImage('resolution_'. $resolution['name'] . '_' . $resolution['resolution']);
+        foreach ($this->resolutions as &$resolution) {
+            $field = $this->frm->addImage('resolution_' . $resolution['name'] . '_' . $resolution['resolution']);
             $resolution['field'] = $field->parse();
         }
-	}
+    }
 
-	/**
-	 * Parse the form
-	 */
-	protected function parse()
-	{
-		// parse the form
-		$this->frm->parse($this->tpl);
+    /**
+     * Parse the form
+     */
+    protected function parse()
+    {
+        // parse the form
+        $this->frm->parse($this->tpl);
         $this->tpl->assign('resolutions', $this->resolutions);
-	}
+    }
 
 
 
-	/**
-	 * Validates the form
-	 */
-	private function validateForm()
-	{
-		// is the form submitted?
-		if($this->frm->isSubmitted())
-		{
-
-			if($this->frm->isCorrect())
-			{
+    /**
+     * Validates the form
+     */
+    private function validateForm()
+    {
+        // is the form submitted?
+        if ($this->frm->isSubmitted()) {
+            if ($this->frm->isCorrect()) {
 
                 // the image path
                 $imagePath = FRONTEND_PATH . '/Themes/' . $this->get('fork.settings')->get('Core', 'theme', 'core') . '/Icons';
 
                 // image provided?
-                if ($this->frm->getField('og')->isFilled())
-                {
+                if ($this->frm->getField('og')->isFilled()) {
                     $this->frm->getField('og')->createThumbnail(
-                        $imagePath  . '/og.png',
+                        $imagePath . '/og.png',
                         1200,
                         630,
                         true,
@@ -117,43 +113,37 @@ class Favicons extends BackendBaseActionEdit
                     );
                 }
 
-                if ($this->frm->getField('all')->isFilled())
-                {
-
-                    foreach($this->resolutions as &$resolution){
-
+                if ($this->frm->getField('all')->isFilled()) {
+                    foreach ($this->resolutions as &$resolution) {
                         $dimensions = explode('x', $resolution['resolution']);
 
                         $width = $dimensions[0];
                         $height = $dimensions[1];
 
                         $this->frm->getField('all')->createThumbnail(
-                            $imagePath  . '/' . $resolution['name'] . $resolution['seperator'] . $resolution['resolution'] . '.png',
+                            $imagePath . '/' . $resolution['name'] . $resolution['seperator'] . $resolution['resolution'] . '.png',
                             $width,
                             $height,
                             true,
                             false,
                             100
                         );
-
                     }
-
                 }
 
 
                 // replace
-                foreach($this->resolutions as &$resolution){
-                    $field = 'resolution_'. $resolution['name'] . '_' . $resolution['resolution'];
+                foreach ($this->resolutions as &$resolution) {
+                    $field = 'resolution_' . $resolution['name'] . '_' . $resolution['resolution'];
 
-                    if($this->frm->getField($field )->isFilled())
-                    {
+                    if ($this->frm->getField($field)->isFilled()) {
                         $dimensions = explode('x', $resolution['resolution']);
 
                         $width = $dimensions[0];
                         $height = $dimensions[1];
 
                         $this->frm->getField($field)->createThumbnail(
-                            $imagePath  . '/' . $resolution['name'] . $resolution['seperator'] . $resolution['resolution'] . '.png',
+                            $imagePath . '/' . $resolution['name'] . $resolution['seperator'] . $resolution['resolution'] . '.png',
                             $width,
                             $height,
                             true,
@@ -163,8 +153,8 @@ class Favicons extends BackendBaseActionEdit
                     }
                 }
 
-				$this->redirect(BackendModel::createURLForAction('Favicons'). '&report=success');
-			}
-		}
-	}
+                $this->redirect(BackendModel::createURLForAction('Favicons') . '&report=success');
+            }
+        }
+    }
 }

@@ -5,7 +5,6 @@ namespace Backend\Modules\Utility\Installer;
 use Backend\Core\Installer\ModuleInstaller;
 use Backend\Core\Engine\Model as BackendModel;
 
-
 /**
  * Installer for the Cache Clear module
  *
@@ -34,6 +33,5 @@ class Installer extends ModuleInstaller
         $this->setNavigation($navigationModuleId, 'Favicons', 'utility/favicons');
 
         $this->setSetting('Core', 'google_maps_key', '');
-
     }
 }

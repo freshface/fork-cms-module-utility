@@ -25,56 +25,53 @@ use Backend\Modules\Utility\Engine\Model as BackendCacheClearModel;
 class ClearCache extends BackendBaseActionEdit
 {
 
-	/**
-	 * Execute the action
-	 */
-	public function execute()
-	{
-		parent::execute();
+    /**
+     * Execute the action
+     */
+    public function execute()
+    {
+        parent::execute();
 
-		$this->loadForm();
-		$this->validateForm();
-		$this->parse();
-		$this->display();
-	}
+        $this->loadForm();
+        $this->validateForm();
+        $this->parse();
+        $this->display();
+    }
 
-	/**
-	 * Load the form
-	 */
-	private function loadForm()
-	{
-		// create form
-		$this->frm = new BackendForm('settings');
-	}
+    /**
+     * Load the form
+     */
+    private function loadForm()
+    {
+        // create form
+        $this->frm = new BackendForm('settings');
+    }
 
-	/**
-	 * Parse the form
-	 */
-	protected function parse()
-	{
+    /**
+     * Parse the form
+     */
+    protected function parse()
+    {
 
-		// parse the form
-		$this->tpl->assign('cleared', $this->get('fork.settings')->get($this->URL->getModule(), 'last_cleared', false));
-		$this->frm->parse($this->tpl);
-	}
+        // parse the form
+        $this->tpl->assign('cleared', $this->get('fork.settings')->get($this->URL->getModule(), 'last_cleared', false));
+        $this->frm->parse($this->tpl);
+    }
 
 
 
-	/**
-	 * Validates the form
-	 */
-	private function validateForm()
-	{
-		// is the form submitted?
-		if($this->frm->isSubmitted())
-		{
-
-			if($this->frm->isCorrect())
-			{
-				BackendCacheClearModel::clear();
-				$this->get('fork.settings')->set($this->URL->getModule(), 'last_cleared', strtotime('now'));
-				$this->redirect(BackendModel::createURLForAction('ClearCache'). '&report=success');
-			}
-		}
-	}
+    /**
+     * Validates the form
+     */
+    private function validateForm()
+    {
+        // is the form submitted?
+        if ($this->frm->isSubmitted()) {
+            if ($this->frm->isCorrect()) {
+                BackendCacheClearModel::clear();
+                $this->get('fork.settings')->set($this->URL->getModule(), 'last_cleared', strtotime('now'));
+                $this->redirect(BackendModel::createURLForAction('ClearCache') . '&report=success');
+            }
+        }
+    }
 }
