@@ -1,0 +1,48 @@
+
+{% extends '/Layout/Templates/base.html.twig' %}
+
+{% block actionbar %}
+
+{% endblock %}
+
+{% block content %}
+  {% form settings %}
+  <div class="row fork-module-content">
+     <div class="col-md-12">
+       <div class="panel panel-default">
+         <div class="panel-heading">
+           <h3 class="panel-title">
+             {{ 'lbl.ClearCache'|trans|ucfirst }}
+           </h3>
+         </div>
+         <div class="panel-body">
+
+			 {% if cleared %}
+			 	<p>Last cleared on: {{ cleared|spoondate('d/m/Y H:i:s')}}.</p>
+
+				{% else %}
+				<p>
+					Never ran before.
+				</p>
+			 {% endif %}
+
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <div class="row fork-module-actions">
+	 <div class="col-md-12">
+	   <div class="btn-toolbar">
+		 <div class="btn-group pull-right" role="group">
+		   <button id="save" type="submit" name="save" class="btn btn-primary">
+			 {{ 'lbl.Clear'|trans|ucfirst }}
+		   </button>
+		 </div>
+	   </div>
+	 </div>
+   </div>
+
+
+  {% endform %}
+{% endblock %}

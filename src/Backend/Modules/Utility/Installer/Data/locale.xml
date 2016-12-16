@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<locale>
+	<Backend>
+		<Utility>
+			<item type="message" name="Success">
+				<translation language="en"><![CDATA[Cache is cleared.]]></translation>
+				<translation language="nl"><![CDATA[De cache is geleegd.]]></translation>
+			</item>
+		</Utility>
+		<Core>
+			<item type="label" name="Utility">
+				<translation language="nl"><![CDATA[utility]]></translation>
+				<translation language="en"><![CDATA[utility]]></translation>
+			</item>
+			<item type="label" name="Clear">
+				<translation language="nl"><![CDATA[clear]]></translation>
+				<translation language="en"><![CDATA[clear]]></translation>
+			</item>
+			<item type="label" name="ClearCache">
+				<translation language="nl"><![CDATA[clear cache]]></translation>
+				<translation language="en"><![CDATA[clear cache]]></translation>
+			</item>
+			<item type="label" name="Favicons">
+				<translation language="nl"><![CDATA[favicons]]></translation>
+				<translation language="en"><![CDATA[favicons]]></translation>
+			</item>
+			<item type="label" name="ReplaceAllFavicons">
+				<translation language="nl"><![CDATA[vervang alle favicons]]></translation>
+				<translation language="en"><![CDATA[replace all favicons]]></translation>
+			</item>
+			<item type="message" name="ReplaceAllFavicons">
+				<translation language="nl"><![CDATA[Genereer alle favicons op basis van 1 afbeelding.]]></translation>
+				<translation language="en"><![CDATA[Generate all favicons based on 1 image.]]></translation>
+			</item>
+			<item type="message" name="UsePngs">
+				<translation language="nl"><![CDATA[Gebruik .png als afbeeldingformaat.]]></translation>
+				<translation language="en"><![CDATA[Use .png as image format.]]></translation>
+			</item>
+		</Core>
+	</Backend>
+	<Frontend>
+		<core>
+		</core>
+	</Frontend>
+</locale>
